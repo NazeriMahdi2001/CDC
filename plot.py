@@ -4,14 +4,14 @@ import matplotlib.pyplot as plt
 import configparser, ast
 from models.car2d import Robot2D
 
-# matplotlib.use("pgf")
-# matplotlib.rcParams.update({
-#     "pgf.texsystem": "pdflatex",
-#     'font.family': 'serif',
-#     'font.size' : 18,
-#     'text.usetex': True,
-#     'pgf.rcfonts': False,
-# })
+matplotlib.use("pgf")
+matplotlib.rcParams.update({
+    "pgf.texsystem": "pdflatex",
+    'font.family': 'serif',
+    'font.size' : 18,
+    'text.usetex': True,
+    'pgf.rcfonts': False,
+})
 
 policy = {}
 with open('outputPRISM_interval_policy.txt', 'r') as file:
@@ -80,9 +80,9 @@ plt.ylabel(r'$x_2$', fontsize=16, rotation='horizontal')
 plt.minorticks_on()
 plt.tick_params(which='both', width=1)
 plt.tick_params(which='major', length=7)
-plt.tick_params(which='minor', length=4)
+plt.tick_params(which='minor', length=5)
 
-plt.gca().xaxis.set_major_locator(plt.LinearLocator(numticks=5))
+plt.gca().xaxis.set_major_locator(plt.LinearLocator(numticks=6))
 plt.gca().yaxis.set_major_locator(plt.LinearLocator(numticks=6))
 
 plt.gca().xaxis.set_minor_locator(plt.FixedLocator(np.arange(stateLowerBound[0], stateUpperBound[0], stateResolution[0])))
