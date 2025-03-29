@@ -82,8 +82,8 @@ plt.tick_params(which='both', width=1)
 plt.tick_params(which='major', length=7)
 plt.tick_params(which='minor', length=5)
 
-plt.gca().xaxis.set_major_locator(plt.LinearLocator(numticks=6))
-plt.gca().yaxis.set_major_locator(plt.LinearLocator(numticks=6))
+plt.gca().xaxis.set_major_locator(plt.LinearLocator(numticks=4))
+plt.gca().yaxis.set_major_locator(plt.LinearLocator(numticks=4))
 
 plt.gca().xaxis.set_minor_locator(plt.FixedLocator(np.arange(stateLowerBound[0], stateUpperBound[0], stateResolution[0])))
 plt.gca().yaxis.set_minor_locator(plt.FixedLocator(np.arange(stateLowerBound[1], stateUpperBound[1], stateResolution[1])))
