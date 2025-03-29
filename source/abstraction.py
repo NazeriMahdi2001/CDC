@@ -9,6 +9,7 @@ from source.commons import floor_decimal
 from source.commons import writeFile
 from matplotlib.patches import Rectangle
 from scipy.stats import binomtest
+import pickle
 
 def find_abs_state(state, stateLowerBound, stateResolution):
         # Find the abstract state of a continuous state
@@ -220,6 +221,18 @@ class Abstraction:
                     interface_fitness[tuple([i, *voxel_index])] = fitness
                     interface[tuple([i, *voxel_index])] = control_index
 
+
+        Int = {}
+        for index, value in np.ndenumerate(interface):
+            action_index = interface[index]
+            action = self.actions[abs_index][index[0]]
+            voxel_index = index[1:]
+            control = self.controlLowerBound + value * control_res + control_res / 2
+            Int[tuple([*voxel_index, *action])] = control
+
+        with open('./controller/' + str(self.partition['tup2idx'][tuple(abs_index)]) + ".bin", "wb") as f:
+            pickle.dump(Int, f)
+
         print(self.actions[abs_index])
         for action_index in range(len(self.actions[abs_index])):
             voxel_indices = np.ndindex(tuple(self.numVoxels))
@@ -333,7 +346,7 @@ class Abstraction:
             self.transitions[abs_index].append(prob_intervals)
             # return
 
-    def find_transitions(self, inverse_confidence = 0.05/50000):
+    def find_transitions(self, inverse_confidence = 0.05/10000):
         self.transitions = np.empty(self.absDimension, dtype=object)
         for index, _ in tqdm(np.ndenumerate(self.transitions), desc="Finding transitions", total=np.prod(self.absDimension)):
             self.transitions[index] = []
@@ -419,11 +432,12 @@ class Abstraction:
         head = 2
 
         for index, _ in np.ndenumerate(self.transitions):
-            if index in self.partition['goal_idx']:
-                # print(' ---- Skip',index,'because it is a goal region')
-                continue
-            if index in self.partition['unsafe_idx']:
-                # print(' ---- Skip',index,'because it is a critical region')
+            if index in self.partition['goal_idx'] or index in self.partition['unsafe_idx']:
+                new_transitions = str(self.partition['tup2idx'][index] + head) + ' 0 ' + str(self.partition['tup2idx'][index] + head) + ' [1.0,1.0] ' + 'a_' + str(self.partition['tup2idx'][index] + head) +  '\n'
+                transition_file_list += new_transitions
+                nr_choices_absolute += 1
+                nr_transitions_absolute += 1
+
                 continue
             
             if self.transitions[index] != []:
