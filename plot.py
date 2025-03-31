@@ -128,11 +128,11 @@ for _ in range(100):
                 noisy_u = u + np.random.normal(scale=noiseLevel, size=controlDimension)
                 nx = system.set_state(*noisy_x).update_dynamics(noisy_u)
 
-                plt.scatter(nx[0], nx[1], c='black', s=5, marker=".", alpha=0.5).set_zorder(11)
                 plt.arrow(x[0], x[1], nx[0] - x[0], nx[1] - x[1], width=0.001, head_width=0, head_length=0, fc='grey', ec='grey', alpha=0.2).set_zorder(10)
                 
                 current = tuple(((nx - stateLowerBound) // stateResolution).astype(int))
                 x = nx
+    plt.scatter(x[0], x[1], c='black', s=5, marker=".", alpha=0.5).set_zorder(11)
 
 # plt.scatter(x[0], x[1], c='black', s=50, marker='s').set_zorder(11)
 
