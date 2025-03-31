@@ -5,14 +5,14 @@ import configparser, ast
 from models.car2d import Robot2D
 import pickle
 
-# matplotlib.use("pgf")
-# matplotlib.rcParams.update({
-#     "pgf.texsystem": "pdflatex",
-#     'font.family': 'serif',
-#     'font.size' : 18,
-#     'text.usetex': True,
-#     'pgf.rcfonts': False,
-# })
+matplotlib.use("pgf")
+matplotlib.rcParams.update({
+     "pgf.texsystem": "pdflatex",
+     'font.family': 'serif',
+     'font.size' : 18,
+     'text.usetex': True,
+     'pgf.rcfonts': False,
+})
 
 policy = {}
 with open('outputPRISM_interval_policy.txt', 'r') as file:
