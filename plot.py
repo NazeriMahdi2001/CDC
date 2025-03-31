@@ -9,7 +9,7 @@ matplotlib.use("pgf")
 matplotlib.rcParams.update({
      "pgf.texsystem": "pdflatex",
      'font.family': 'serif',
-     'font.size' : 18,
+     'font.size' : 22,
      'text.usetex': True,
      'pgf.rcfonts': False,
 })
@@ -73,8 +73,8 @@ prismIntervalVector = prismIntervalVector.reshape(absDimension).T
 plt.imshow(prismIntervalVector, extent=(stateLowerBound[0], stateUpperBound[0], stateUpperBound[1], stateLowerBound[1]), aspect='auto', cmap='coolwarm', vmin=0.0, vmax=1.0)
 plt.colorbar()
 
-plt.xlabel(r'$x$', fontsize=20)
-plt.ylabel(r'$y$', fontsize=20, rotation='horizontal')
+plt.xlabel(r'$x$', fontsize=22)
+plt.ylabel(r'$y$', fontsize=22, rotation='horizontal')
 
 plt.minorticks_on()
 plt.tick_params(which='both', width=1)
@@ -97,8 +97,8 @@ plt.figure(figsize=[10, 10])
 plt.xlim(stateLowerBound[0], stateUpperBound[0])
 plt.ylim(stateLowerBound[1], stateUpperBound[1])
 
-plt.xlabel(r'$x$', fontsize=20)
-plt.ylabel(r'$y$', fontsize=20, rotation='horizontal')
+plt.xlabel(r'$x$', fontsize=22)
+plt.ylabel(r'$y$', fontsize=22, rotation='horizontal')
 
 start = np.array([0.43, 0.34])
 init = tuple(((start - stateLowerBound) // stateResolution).astype(int))

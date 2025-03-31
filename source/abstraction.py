@@ -346,7 +346,7 @@ class Abstraction:
             self.transitions[abs_index].append(prob_intervals)
             # return
 
-    def find_transitions(self, inverse_confidence = 0.05/10000):
+    def find_transitions(self, inverse_confidence = 0.05/20000):
         self.transitions = np.empty(self.absDimension, dtype=object)
         for index, _ in tqdm(np.ndenumerate(self.transitions), desc="Finding transitions", total=np.prod(self.absDimension)):
             self.transitions[index] = []
